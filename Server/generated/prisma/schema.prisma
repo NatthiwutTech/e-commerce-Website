@@ -1,0 +1,104 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String? // nullable to support OAuth logins (Google, GitHub, etc.)
+  name      String?
+  picture   String?
+  roles     String   @default("user")
+  enabled   Boolean  @default(true)
+  address   String?
+  orders    Order[]
+  carts     Carts[]
+  createdAt DateTime @default(now()) // @default(now()) sets the default value to the current timestamp when a new record is created
+  updatedAt DateTime @updatedAt // @updatedAt automatically updates the timestamp whenever the record is updated
+}
+
+model Product {
+  id          Int              @id @default(autoincrement())
+  title       String
+  description String?
+  price       Float
+  sold        Int              @default(0)
+  quintity    Int
+  orderItems  ProductOnOrder[]
+  cartItems   ProductOnCart[]
+  images      Image[] // Relation to Image One to Many จาก Product ไปยัง Image
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model Order {
+  id          Int              @id @default(autoincrement())
+  products    ProductOnOrder[] // Relation to ProductOnOrder One to Many จาก Order ไปยัง ProductOnOrder(ที่เป็นตัวกลางไว้รับตารางone to many หลายตัว)
+  cartTotal   Float
+  orderStatus String           @default("Not Processed")
+  orderedBy   User             @relation(fields: [orderedById], references: [id], onDelete: Cascade) // Cascade delete to remove Orders when a User is deleted
+  orderedById Int
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model ProductOnOrder {
+  id        Int     @id @default(autoincrement())
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade) // Cascade delete to remove ProductOnOrder entries when a Product is deleted
+  productId Int
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade) // Cascade delete to remove ProductOnOrder entries when an Order is deleted
+  orderId   Int
+  count     Int
+  price     Float
+}
+
+model Category {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Carts {
+  id          Int             @id @default(autoincrement())
+  products    ProductOnCart[]
+  cartTotal   Float
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  orderedBy   User            @relation(fields: [orderedById], references: [id], onDelete: Cascade) // Cascade delete to remove Carts when a User is deleted
+  orderedById Int
+}
+
+model ProductOnCart {
+  id        Int     @id @default(autoincrement())
+  cart      Carts   @relation(fields: [cartId], references: [id])
+  cartId    Int
+  Product   Product @relation(fields: [productId], references: [id], onDelete: Cascade) // Cascade delete to remove ProductOnCart entries when a Product is deleted
+  productId Int
+  count     Int
+  price     Float
+}
+
+model Image {
+  id         Int      @id @default(autoincrement())
+  asset_id   String
+  public_id  String
+  url        String
+  secure_url String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade) // Cascade delete to remove Images when a Product is deleted  
+  productId  Int
+}
