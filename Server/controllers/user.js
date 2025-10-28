@@ -2,7 +2,6 @@ const prisma = require("../config/prisma");
 
 exports.listUsers = async (req, res) => {
   try {
-    //code
     const users = await prisma.user.findMany({
       select: {
         id: true,
@@ -20,7 +19,6 @@ exports.listUsers = async (req, res) => {
 };
 exports.changeStatus = async (req, res) => {
   try {
-    //code
     const { id, enabled } = req.body;
     console.log(id, enabled);
     const user = await prisma.user.update({
@@ -36,7 +34,6 @@ exports.changeStatus = async (req, res) => {
 };
 exports.changeRole = async (req, res) => {
   try {
-    //code
     const { id, role } = req.body;
 
     const user = await prisma.user.update({
@@ -52,7 +49,6 @@ exports.changeRole = async (req, res) => {
 };
 exports.userCart = async (req, res) => {
   try {
-    //code
     const { cart } = req.body;
     console.log(cart);
     console.log(req.user.id);
@@ -69,8 +65,7 @@ exports.userCart = async (req, res) => {
         where: { id: item.id },
         select: { quantity: true, title: true },
       });
-      // console.log(item)
-      // console.log(product)
+
       if (!product || item.count > product.quantity) {
         return res.status(400).json({
           ok: false,
@@ -124,8 +119,6 @@ exports.userCart = async (req, res) => {
 };
 exports.getUserCart = async (req, res) => {
   try {
-    //code
-    // req.user.id
     const cart = await prisma.cart.findFirst({
       where: {
         orderedById: Number(req.user.id),
@@ -150,7 +143,6 @@ exports.getUserCart = async (req, res) => {
 };
 exports.emptyCart = async (req, res) => {
   try {
-    //code
     const cart = await prisma.cart.findFirst({
       where: { orderedById: Number(req.user.id) },
     });
@@ -176,7 +168,6 @@ exports.emptyCart = async (req, res) => {
 };
 exports.saveAddress = async (req, res) => {
   try {
-    //code
     const { address } = req.body;
     console.log(address);
     const addresssUser = await prisma.user.update({
@@ -196,17 +187,9 @@ exports.saveAddress = async (req, res) => {
 };
 exports.saveOrder = async (req, res) => {
   try {
-    //code
-    // Step 0 Check Stripe
-    // console.log(req.body)
-    // return res.send('hello Jukkru!!!')
-    // stripePaymentId String
-    // amount          Int
-    // status          String
-    // currentcy       String
     const { id, amount, status, currency } = req.body.paymentIntent;
 
-    // Step 1 Get User Cart
+    // Get User Cart
     const userCart = await prisma.cart.findFirst({
       where: {
         orderedById: Number(req.user.id),
@@ -268,7 +251,6 @@ exports.saveOrder = async (req, res) => {
 };
 exports.getOrder = async (req, res) => {
   try {
-    //code
     const orders = await prisma.order.findMany({
       where: { orderedById: Number(req.user.id) },
       include: {

@@ -35,7 +35,7 @@ exports.getOrderAdmin = async (req, res) => {
         })
         res.json(orders)
     } catch (err) {
-        console.log(err)
+        console.log(errr)
         res.status(500).json({ message: "Server error" })
     }
 }
