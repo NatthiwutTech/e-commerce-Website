@@ -1,4 +1,3 @@
-
 import React from "react";
 import { ListCheck } from "lucide-react";
 import useEcomStore from "../../store/ecom-store";
@@ -32,22 +31,16 @@ const ListCart = () => {
 
   return (
     <div className="bg-gray-100 rounded-sm p-4">
-      {/* Header */}
       <div className="flex gap-4 mb-4">
         <ListCheck size={36} />
         <p className="text-2xl font-bold">รายการสินค้า {cart.length} รายการ</p>
       </div>
 
-      {/* List */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {/* Left */}
         <div className="col-span-2">
-          {/* Card */}
           {cart.map((item, index) => (
             <div key={index} className="bg-white p-2 rounded-md shadow-md mb-2">
-              {/* Row 1 */}
               <div className="flex justify-between mb-2">
-                {/* Left */}
                 <div className="flex gap-2 items-center">
                   {item.images && item.images.length > 0 ? (
                     <img
@@ -70,7 +63,7 @@ const ListCart = () => {
                     </p>
                   </div>
                 </div>
-                {/* Right */}
+
                 <div>
                   <div className="font-bold text-blue-500">
                     {numberFormat(item.price * item.count)}
@@ -81,7 +74,6 @@ const ListCart = () => {
           ))}
         </div>
 
-        {/* Right */}
         <div className="bg-white p-4 rounded-md shadow-md space-y-4">
           <p className="text-2xl font-bold">ยอดรวม</p>
           <div className="flex justify-between">

@@ -12,7 +12,7 @@ const HistoryCard = () => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    
+    // code
     hdlGetOrders(token);
   }, []);
 
@@ -43,14 +43,14 @@ const HistoryCard = () => {
   return (
     <div className="space-y-4">
       <h1 className="text-2xl font-bold">ประวัติการสั่งซื้อ</h1>
-      {/* คลุม */}
+  
       <div className="space-y-4">
-        {/* Card Loop Order*/}
+   
         {orders?.map((item, index) => {
-          // console.log(item)
+       
           return (
             <div key={index} className="bg-gray-100 p-4 rounded-md shadow-md">
-              {/*  header */}
+ 
               <div className="flex justify-between mb-2">
                 <div>
                   <p className="text-sm">Order date</p>
@@ -63,7 +63,7 @@ const HistoryCard = () => {
                   </span>
                 </div>
               </div>
-              {/*  table Loop Product*/}
+              
               <div>
                 <table className="border w-full">
                   <thead>
@@ -94,7 +94,7 @@ const HistoryCard = () => {
                   </tbody>
                 </table>
               </div>
-              {/*  Total */}
+       
               <div>
                 <div className="text-right">
                   <p>ราคาสุทธิ</p>

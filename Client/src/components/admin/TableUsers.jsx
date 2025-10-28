@@ -9,7 +9,6 @@ const TableUsers = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // code body
     handleGetUsers(token);
   }, []);
 

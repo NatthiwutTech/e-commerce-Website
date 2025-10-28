@@ -8,7 +8,6 @@ const BestSeller = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-
     loadData();
   }, []);
 
@@ -25,16 +24,13 @@ const BestSeller = () => {
   console.log(data);
 
   return (
-    <div>
-
-      <SwiperShowProduct>
-        {data?.map((item, index) => (
-          <SwiperSlide>
-            <ProductCard item={item} key={index} />
-          </SwiperSlide>
-        ))}
-      </SwiperShowProduct>
-    </div>
+    <SwiperShowProduct>
+      {data?.map((item, index) => (
+        <SwiperSlide>
+          <ProductCard item={item} key={index} />
+        </SwiperSlide>
+      ))}
+    </SwiperShowProduct>
   );
 };
 

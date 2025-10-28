@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -19,7 +18,6 @@ const registerSchema = z
   });
 
 const Register = () => {
-
   const [passwordScore, setPasswordScore] = useState(0);
 
   const {
@@ -40,14 +38,6 @@ const Register = () => {
   }, [watch().password]);
 
   const onSubmit = async (data) => {
-    // const passwordScore = zxcvbn(data.password).score;
-    // console.log(passwordScore);
-    // if (passwordScore < 3) {
-    //   toast.warning("Password บ่ Strong!!!!!");
-    //   return;
-    // }
-    // console.log("ok ลูกพี่");
-    // Send to Back
     try {
       const res = await axios.post("http://localhost:5000/api/register", data);
 
@@ -60,8 +50,6 @@ const Register = () => {
     }
   };
 
-  // const tam = Array.from(Array(5))
-  // console.log(tam)
   console.log(passwordScore);
   return (
     <div
@@ -126,31 +114,32 @@ const Register = () => {
             </div>
 
             <div>
-              <input {...register("confirmPassword")} 
-              type="password"
-               placeholder="Confirm Password"
-              className={`border w-full px-3 py-2 rounded
+              <input
+                {...register("confirmPassword")}
+                type="password"
+                placeholder="Confirm Password"
+                className={`border w-full px-3 py-2 rounded
                 focus:outline-none focus:ring-2 focus:ring-blue-500
                 focus:border-transparent
                 ${errors.confirmPassword && "border-red-500"}
                 `}
-                />
-
+              />
 
               {errors.confirmPassword && (
-                <p className="text-red-500 text-sm">{errors.confirmPassword.message}</p>
+                <p className="text-red-500 text-sm">
+                  {errors.confirmPassword.message}
+                </p>
               )}
             </div>
 
-            <button 
-            className="bg-blue-500 rounded-md
+            <button
+              className="bg-blue-500 rounded-md
              w-full text-white font-bold py-2 shadow
              hover:bg-blue-700
-             ">
+             "
+            >
               Register
-              </button>
-
-
+            </button>
           </div>
         </form>
       </div>

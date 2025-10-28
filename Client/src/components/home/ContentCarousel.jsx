@@ -4,26 +4,17 @@ import axios from "axios";
 
 import "swiper/css";
 import "swiper/css/pagination";
-import 'swiper/css/navigation';
+import "swiper/css/navigation";
 
 import { Pagination, Autoplay, Navigation } from "swiper/modules";
 
-
-
 const ContentCarousel = () => {
-
-  const [data, setData] = useState([
-    // { id: 1, download_url: "https://placehold.co/600x400/cccccc/999999" },
-    // { id: 2, download_url: "https://placehold.co/600x400/cccccc/999999" },
-    // { id: 3, download_url: "https://placehold.co/600x400/cccccc/999999" },
-    // { id: 4, download_url: "https://placehold.co/600x400/cccccc/999999" },
-  ]);
+  const [data, setData] = useState([]);
   useEffect(() => {
     hdlGetImage();
   }, []);
 
   const hdlGetImage = () => {
-    // code
     axios
       .get("https://picsum.photos/v2/list?page=1&limit=20")
       .then((res) => setData(res.data))
@@ -63,9 +54,7 @@ const ContentCarousel = () => {
       >
         {data?.map((item, i) => (
           <SwiperSlide>
-            <img
-              className="rounded-md"
-              src={item.download_url} />
+            <img className="rounded-md" src={item.download_url} />
           </SwiperSlide>
         ))}
       </Swiper>

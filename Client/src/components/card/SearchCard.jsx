@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/ecom-store";
 import Slider from "rc-slider";
@@ -21,11 +20,13 @@ const SearchCard = () => {
   const [price, setPrice] = useState([1000, 30000]);
   const [ok, setOk] = useState(false);
 
+  // console.log(categories)
   useEffect(() => {
     getCategory();
   }, []);
 
   // Step 1 Search Text
+  // console.log(text)
   useEffect(() => {
     const delay = setTimeout(() => {
       if (text) {
@@ -58,6 +59,7 @@ const SearchCard = () => {
       getProduct();
     }
   };
+  // console.log(categorySelected)
 
   // Step 3 Search by Price
   useEffect(() => {

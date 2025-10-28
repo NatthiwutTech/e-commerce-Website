@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
@@ -23,9 +22,9 @@ const SwiperShowProduct = ({ children }) => {
       }}
       breakpoints={{
         320: {
-            slidesPerView: 2,
-            spaceBetween: 20,
-          },
+          slidesPerView: 2,
+          spaceBetween: 20,
+        },
         640: {
           slidesPerView: 3,
           spaceBetween: 20,
@@ -39,9 +38,9 @@ const SwiperShowProduct = ({ children }) => {
           spaceBetween: 50,
         },
         1280: {
-            slidesPerView: 6,
-            spaceBetween: 50,
-       },
+          slidesPerView: 6,
+          spaceBetween: 50,
+        },
       }}
       className="mySwiper object-cover rounded-md"
     >

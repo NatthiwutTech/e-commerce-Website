@@ -1,11 +1,9 @@
-
 import React, { useState, useEffect } from "react";
 import { listUserCart, saveAddress } from "../../api/user";
 import useEcomStore from "../../store/ecom-store";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { numberFormat } from "../../utils/number";
-
 
 const SummaryCard = () => {
   const token = useEcomStore((state) => state.token);
@@ -59,7 +57,6 @@ const SummaryCard = () => {
   return (
     <div className="mx-auto">
       <div className="flex flex-wrap gap-4">
-        {/* Left */}
         <div className="w-2/4">
           <div
             className="bg-gray-100 p-4 rounded-md 
@@ -83,7 +80,6 @@ const SummaryCard = () => {
           </div>
         </div>
 
-        {/* Right */}
         <div className="w-2/4">
           <div
             className="bg-gray-100 p-4 rounded-md 
@@ -99,13 +95,13 @@ const SummaryCard = () => {
                   <div>
                     <p className="font-bold">{item.product.title}</p>
                     <p className="text-sm">
-                      จำนวน : {item.count} x {numberFormat(item.product.price) }
+                      จำนวน : {item.count} x {numberFormat(item.product.price)}
                     </p>
                   </div>
 
                   <div>
                     <p className="text-red-500 font-bold">
-                      { numberFormat(item.count * item.product.price)     }
+                      {numberFormat(item.count * item.product.price)}
                     </p>
                   </div>
                 </div>
@@ -127,7 +123,9 @@ const SummaryCard = () => {
             <div>
               <div className="flex justify-between">
                 <p className="font-bold">ยอดรวมสุทธิ:</p>
-                <p className="text-red-500 font-bold text-lg">{numberFormat(cartTotal) }</p>
+                <p className="text-red-500 font-bold text-lg">
+                  {numberFormat(cartTotal)}
+                </p>
               </div>
             </div>
 

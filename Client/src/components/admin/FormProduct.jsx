@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import useEcomStore from "../../store/ecom-store";
 import { createProduct, deleteProduct } from "../../api/product";
@@ -35,7 +34,6 @@ const FormProduct = () => {
   });
 
   useEffect(() => {
-   
     getCategory();
     getProduct(100);
   }, []);
@@ -62,7 +60,6 @@ const FormProduct = () => {
   const handleDelete = async (id) => {
     if (window.confirm("จะลบจริงๆ หรอ")) {
       try {
-      
         const res = await deleteProduct(token, id);
         console.log(res);
         toast.success("Deleted สินค้าเรียบร้อยแล้ว");
@@ -153,7 +150,6 @@ const FormProduct = () => {
           </thead>
           <tbody>
             {products.map((item, index) => {
-              // console.log(item)
               return (
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>

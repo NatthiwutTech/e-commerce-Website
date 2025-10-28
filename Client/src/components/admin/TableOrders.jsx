@@ -1,4 +1,3 @@
-// rafce
 import React, { useEffect, useState } from "react";
 import { getOrdersAdmin, changeOrderStatus } from "../../api/admin";
 import useEcomStore from "../../store/ecom-store";
@@ -6,13 +5,11 @@ import { toast } from "react-toastify";
 import { numberFormat } from "../../utils/number";
 import { dateFormat } from "../../utils/dateformat";
 
-
 const TableOrders = () => {
   const token = useEcomStore((state) => state.token);
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
-    
     handleGetOrder(token);
   }, []);
 
@@ -27,7 +24,6 @@ const TableOrders = () => {
   };
 
   const handleChangeOrderStatus = (token, orderId, orderStatus) => {
-   
     console.log(orderId, orderStatus);
     changeOrderStatus(token, orderId, orderStatus)
       .then((res) => {
@@ -80,9 +76,7 @@ const TableOrders = () => {
                     <p>{item.orderedBy.address}</p>
                   </td>
 
-                  <td>
-                    {dateFormat(item.createdAt)}
-                  </td>
+                  <td>{dateFormat(item.createdAt)}</td>
 
                   <td className="px-2 py-4">
                     {item.products?.map((product, index) => (

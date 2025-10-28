@@ -2,10 +2,9 @@ import React from "react";
 import { Trash2, Minus, Plus } from "lucide-react";
 import useEcomStore from "../../store/ecom-store";
 import { Link } from "react-router-dom";
-import { numberFormat } from '../../utils/number'
+import { numberFormat } from "../../utils/number";
 
 const CartCard = () => {
-
   const carts = useEcomStore((state) => state.carts);
   const actionUpdateQuantity = useEcomStore(
     (state) => state.actionUpdateQuantity
@@ -18,14 +17,11 @@ const CartCard = () => {
   return (
     <div>
       <h1 className="text-2xl font-bold">ตะกร้าสินค้า</h1>
-      {/* Border */}
+
       <div className="border p-2">
-        {/* Card */}
         {carts.map((item, index) => (
           <div key={index} className="bg-white p-2 rounded-md shadow-md mb-2">
-            {/* Row 1 */}
             <div className="flex justify-between mb-2">
-              {/* Left */}
               <div className="flex gap-2 items-center">
                 {item.images && item.images.length > 0 ? (
                   <img
@@ -46,7 +42,7 @@ const CartCard = () => {
                   <p className="text-sm">{item.description}</p>
                 </div>
               </div>
-              {/* Right */}
+
               <div
                 onClick={() => actionRemoveProduct(item.id)}
                 className="text-red-600 p-2"
@@ -55,9 +51,7 @@ const CartCard = () => {
               </div>
             </div>
 
-            {/* Row 2  */}
             <div className="flex justify-between">
-              {/* Left */}
               <div className="border rounded-sm px-2 py-1 flex items-center">
                 <button
                   onClick={() => actionUpdateQuantity(item.id, item.count - 1)}
@@ -77,17 +71,19 @@ const CartCard = () => {
                   <Plus size={16} />
                 </button>
               </div>
-              {/* Right */}
-              <div className="font-bold text-blue-500">{numberFormat(item.price * item.count)}</div>
+
+              <div className="font-bold text-blue-500">
+                {numberFormat(item.price * item.count)}
+              </div>
             </div>
           </div>
         ))}
-        {/* Total */}
+
         <div className="flex justify-between px-2">
           <span>รวม</span>
           <span>{numberFormat(getTotalPrice())}</span>
         </div>
-        {/* Button */}
+
         <Link to="/cart">
           <button
             className="mt-4 bg-green-500 hover:bg-green-700

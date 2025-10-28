@@ -23,12 +23,12 @@ const ecomStore = (set, get) => ({
   actionAddtoCart: (product) => {
     const carts = get().carts;
     const updateCart = [...carts, { ...product, count: 1 }];
-    // Step Uniqe
+  
     const uniqe = _.unionWith(updateCart, _.isEqual);
     set({ carts: uniqe });
   },
   actionUpdateQuantity: (productId, newQuantity) => {
-    // console.log('Update Clickkkkk', productId, newQuantity)
+ 
     set((state) => ({
       carts: state.carts.map((item) =>
         item.id === productId
@@ -38,7 +38,7 @@ const ecomStore = (set, get) => ({
     }));
   },
   actionRemoveProduct: (productId) => {
-    // console.log('remove jaaaaa', productId)
+  
     set((state) => ({
       carts: state.carts.filter((item) => item.id !== productId),
     }));

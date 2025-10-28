@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -6,7 +5,6 @@ import useEcomStore from "../../store/ecom-store";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-
   const navigate = useNavigate();
   const actionLogin = useEcomStore((state) => state.actionLogin);
   const user = useEcomStore((state) => state.user);

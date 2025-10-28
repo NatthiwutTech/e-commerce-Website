@@ -1,11 +1,12 @@
-
-import React from 'react'
-import FormEditProduct from '../../components/admin/FormEditProduct'
+import React from "react";
+import FormEditProduct from "../../components/admin/FormEditProduct";
 
 const EditProduct = () => {
-    return (
-        <div><FormEditProduct /></div>
-    )
-}
+  return (
+    <div>
+      <FormEditProduct />
+    </div>
+  );
+};
 
-export default EditProduct
+export default EditProduct;

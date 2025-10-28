@@ -8,7 +8,6 @@ const NewProduct = () => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-   
     loadData();
   }, []);
 
