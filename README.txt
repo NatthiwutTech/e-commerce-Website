@@ -1,7 +1,19 @@
 https://nodejs.org/en/download/package-manager/current
 https://www.postman.com/downloads/
 https://dev.mysql.com/downloads/workbench/
+https://code.visualstudio.com/download
 
+
+-----ที่อยู่ของport-------
+//Client
+src/api ทุกไฟล์
+auth/register
+store/ecom-store
+
+แก้ไข STIPE และ ข้อมูลใน .envด้วย
+
+สิ่งที่ติดตั้งเพิ่ม
+npm install recharts
 
 -----------Server---------------
 npm init -y
@@ -17,7 +29,7 @@ npm install prisma
 npx prisma init
 npm install @prisma/client
 
-// ใช้ในการสร้างและอัพเดตฐานข้อมูล
+// Doc ใช้ในการสร้างและอัพเดตฐานข้อมูล
 npx prisma migrate dev --name ecom
 
 
@@ -32,8 +44,6 @@ npx prisma migrate dev --name ecom
 อัพเดต Prisma schema
 npx prisma migrate dev
 
-
-
 ------------Client--------------
 npm create vite@latest .
 - client
@@ -44,6 +54,7 @@ npm create vite@latest .
 >npm run dev
 
 npm install axios
+npm install recharts
 
 
 --------------------------
@@ -86,3 +97,89 @@ npm install moment
 npm install react-hook-form zod @hookform/resolvers zxcvbn
 
 --------------------------
+
+
+
+
+--------- Deploy DB to Supabase ------
+1. Login Supabase
+2. .env
+        DATABASE_URL = ""
+        DIRECT_URL = ""
+3. schema.prisma
+        datasource db {
+        provider  = "postgresql"
+        url       = env("DATABASE_URL")
+        directUrl = env("DIRECT_URL")
+        }
+
+npx prisma db push
+----When update ----
+- DATABASE_URL : "?pgbouncer=true&connection_limit=1"
+npx prisma db push
+
+
+/* Enjoy */
+--------- Deploy Server to Vercel ------
+1. create vercel.json
+
+{
+    "version": 2,
+    "name": "Tar",
+    "builds": [
+      {
+        "src": "server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "server.js",
+        "headers": {
+          "Access-Control-Allow-Origin": "*"
+        }
+      }
+    ]
+  }
+
+2. package.json
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server",
+    "postinstall": "prisma generate"
+  },
+  
+
+  git init
+  git add . 
+  git commit -m "init"
+  git push..........
+
+3. add project to vercel
+3.1 in build command
+npx prisma generate
+3.2 add env
+/* Enjoy */
+
+
+
+
+--------- Deploy Client to Vercel ------
+1. create vercel.json
+
+{
+    "routes":[
+        {
+            "src":"/[^.]+",
+            "dest":"/"
+        }
+    ]
+}
+
+2. git init
+3. git add .
+4. git commit -m "init"
+
+5. add project to vercel 
+/* Enjoy */
