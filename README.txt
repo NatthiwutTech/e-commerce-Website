@@ -1,185 +1,87 @@
-https://nodejs.org/en/download/package-manager/current
-https://www.postman.com/downloads/
-https://dev.mysql.com/downloads/workbench/
-https://code.visualstudio.com/download
+# E-Commerce Website
 
+โปรเจกต์เว็บE-Commerce (Full-Stack) ที่ทำขึ้นเพื่อฝึกฝนการพัฒนาระบบแบบครบวงจร ตั้งแต่การออกแบบฐานข้อมูล ออกแบบ API ไปจนถึงการทำ UI ฝั่งหน้าบ้านและการ deploy ขึ้นใช้งานจริง
 
------ที่อยู่ของport-------
-//Client
-src/api ทุกไฟล์
-auth/register
-store/ecom-store
+## ภาพรวมโปรเจกต์
 
-แก้ไข STIPE และ ข้อมูลใน .envด้วย
+โปรเจกต์นี้จำลองระบบร้านค้าออนไลน์แบบครบวงจร ตั้งแต่การเรียกดูสินค้า ระบบสมัครสมาชิก/เข้าสู่ระบบ (รวมถึง Google Login) ระบบตะกร้าสินค้า การชำระเงิน ไปจนถึงการจัดการคำสั่งซื้อ โดยพัฒนาแยกทั้งฝั่ง Client และ Server เอง
 
-สิ่งที่ติดตั้งเพิ่ม
-npm install recharts
+## เทคโนโลยีที่ใช้
 
------------Server---------------
-npm init -y
-npm install express morgan cors nodemon bcryptjs jsonwebtoken
+**ฝั่ง Frontend**
+- React (Vite)
+- Zustand — จัดการ global state
+- Axios — เรียกใช้งาน API
+- React Router — ทำระบบ routing ฝั่ง client
+- Google OAuth — ระบบล็อกอินผ่าน Google
+- React Hook Form + Zod — จัดการฟอร์มและตรวจสอบข้อมูล (validation)
 
+**ฝั่ง Backend**
+- Node.js + Express
+- Prisma ORM
+- PostgreSQL (host บน Supabase)
+- JSON Web Token (JWT) — ระบบยืนยันตัวตน
+- bcryptjs — เข้ารหัสรหัสผ่าน
 
-MySQL
-prisma
-Tar123456
+**บริการเสริมอื่นๆ**
+- Stripe — ระบบชำระเงิน
+- Cloudinary — จัดเก็บและอัปโหลดรูปภาพ
 
+**การ Deploy**
+- ทั้งฝั่ง Frontend และ Backend deploy บน Vercel
 
-npm install prisma
-npx prisma init
-npm install @prisma/client
+## ฟีเจอร์หลัก
 
-// Doc ใช้ในการสร้างและอัพเดตฐานข้อมูล
-npx prisma migrate dev --name ecom
+- สมัครสมาชิกและเข้าสู่ระบบ (อีเมล/รหัสผ่าน และ Google OAuth)
+- เรียกดูและค้นหาสินค้า
+- ระบบตะกร้าสินค้าและขั้นตอนชำระเงิน
+- ประมวลผลการชำระเงินผ่าน Stripe
+- อัปโหลดรูปภาพผ่าน Cloudinary
+- ประวัติและการจัดการคำสั่งซื้อ
+- ดีไซน์ที่รองรับหลายขนาดหน้าจอ (Responsive UI)
 
+## โครงสร้างโปรเจกต์
 
+```
+├── Client/     # ฝั่ง Frontend (React + Vite)
+└── Server/     # ฝั่ง Backend (Express + Prisma)
+```
 
-// update Scheme
-npx prisma db push   // no log
-npx prisma migrate dev --create-only
-npx prisma migrate dev --name ecom
+## เริ่มต้นใช้งาน
 
+### สิ่งที่ต้องมีก่อน
+- Node.js
+- ฐานข้อมูล PostgreSQL (หรือโปรเจกต์บน Supabase)
+- บัญชี Stripe (สำหรับคีย์ระบบชำระเงิน)
+- บัญชี Cloudinary (สำหรับคีย์อัปโหลดรูปภาพ)
 
-//
-อัพเดต Prisma schema
-npx prisma migrate dev
+### วิธีติดตั้ง
 
-------------Client--------------
-npm create vite@latest .
-- client
-- javascript 
+1. Clone repository
+   ```bash
+   git clone https://github.com/NatthiwutTech/e-commerce-Website.git
+   ```
 
->cd client
->npm install
->npm run dev
+2. ติดตั้ง dependencies ทั้งฝั่ง client และ server
+   ```bash
+   cd Server && npm install
+   cd ../Client && npm install
+   ```
 
-npm install axios
-npm install recharts
+3. ตั้งค่าตัวแปรแวดล้อม (`.env`) ทั้งในโฟลเดอร์ `Client` และ `Server` — เช่น database URL, JWT secret, Stripe keys, Cloudinary keys และ Google OAuth client ID
 
+4. เตรียมฐานข้อมูล
+   ```bash
+   cd Server
+   npx prisma migrate dev
+   ```
 
---------------------------
-MySQL
-prisma
-Tar123456
+5. รันโปรเจกต์
+   ```bash
+   # Server
+   npm run start
 
-
------------Server---------------
-npm init -y
-npm install express mongoose morgan body-parser cors nodemon socket.io
-npm i cloudinary
-npm install google-auth-library
-
-
-------------Client--------------
-npm create vite@latest
-- client
-- javascript
-
->cd client
->npm install
->npm run dev
-
-npm install @radix-ui/themes
-npm i zustand axios
-npm i react-router-dom
-npm install @react-oauth/google@latest
-
-
-npm i react-image-file-resizer
-npm i react-toastify
-npm i react-icons
-npm i lucide-react
-npm i lodash
-npm i rc-slider
-npm i numeral
-npm install moment
-
-npm install react-hook-form zod @hookform/resolvers zxcvbn
-
---------------------------
-
-
-
-
---------- Deploy DB to Supabase ------
-1. Login Supabase
-2. .env
-        DATABASE_URL = ""
-        DIRECT_URL = ""
-3. schema.prisma
-        datasource db {
-        provider  = "postgresql"
-        url       = env("DATABASE_URL")
-        directUrl = env("DIRECT_URL")
-        }
-
-npx prisma db push
-----When update ----
-- DATABASE_URL : "?pgbouncer=true&connection_limit=1"
-npx prisma db push
-
-
-/* Enjoy */
---------- Deploy Server to Vercel ------
-1. create vercel.json
-
-{
-    "version": 2,
-    "name": "Tar",
-    "builds": [
-      {
-        "src": "server.js",
-        "use": "@vercel/node"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "server.js",
-        "headers": {
-          "Access-Control-Allow-Origin": "*"
-        }
-      }
-    ]
-  }
-
-2. package.json
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server",
-    "postinstall": "prisma generate"
-  },
-  
-
-  git init
-  git add . 
-  git commit -m "init"
-  git push..........
-
-3. add project to vercel
-3.1 in build command
-npx prisma generate
-3.2 add env
-/* Enjoy */
-
-
-
-
---------- Deploy Client to Vercel ------
-1. create vercel.json
-
-{
-    "routes":[
-        {
-            "src":"/[^.]+",
-            "dest":"/"
-        }
-    ]
-}
-
-2. git init
-3. git add .
-4. git commit -m "init"
-
-5. add project to vercel 
-/* Enjoy */
+   # Client (เปิด terminal อีกหน้าต่างแยก)
+   cd ../Client
+   npm run dev
+   ```
